@@ -1,0 +1,35 @@
+# Use the official Python image
+FROM python:3.11
+
+# Set the working directory inside the container
+WORKDIR /app
+
+# Copy the application code to the working directory
+COPY . /app
+
+# Install LibreOffice and other required dependencies
+RUN apt-get update && apt-get install -y \
+
+    libreoffice \
+    && apt-get clean
+
+# Install Python dependencies
+RUN pip install --upgrade pip && \
+
+    pip install -r requirements.txt
+
+# Run Django migrations during build time
+RUN python manage.py makemigrations && python manage.py migrate
+
+# Uninstall old spellchecker and install the new one
+RUN pip uninstall spellchecker -y && \
+
+    pip install pyspellchecker
+
+# Expose the desired port (3006 in this case)
+EXPOSE 3006
+
+# Run the Django development server
+CMD ["python", "manage.py", "runserver", "0.0.0.0:3006"]
+
+

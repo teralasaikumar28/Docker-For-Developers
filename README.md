@@ -166,6 +166,6 @@ Docker volumes are a persistent storage solution that allows containers to store
    if you add -a to above command it will remove tagged images also which are not used by any container
 
 
-### sample dockerfile for react,java,python and angular are there in above files
+#### sample dockerfile for react,java,python and angular are there in above files
 #### dockerfile will change accroding to need(example in python i need libraoffice,so i have added that step)
-### for react project I do not need build step for my use case so I have started the server dircetly
+#### for react project I do not need build step for my use case so I have started the server dircetly
